@@ -1,0 +1,93 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Roboto", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  background-color: var(--background-color);
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.App-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.App-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.logging-switch {
+  margin-bottom: 20px;
+}
+
+.add-product {
+  margin-bottom: 20px;
+}
+
+.add-product .ant-input {
+  background-color: #444;  /* Темный фон */
+  color: #fff;              /* Белый текст */
+  border-color: #888;       /* Цвет рамки */
+}
+
+.add-product .ant-input::placeholder {
+  color: #bbb;  /* Цвет плейсхолдера */
+}
+
+.add-product .ant-btn-primary {
+  background-color: #61dafb;  /* Основной цвет */
+  color: #000;                /* Цвет текста */
+  border: none;
+}
+
+.add-product .ant-btn-primary:hover {
+  background-color: #21a1f1;  /* Цвет при наведении */
+  color: #000;
+}
+
+.product-list {
+  margin-top: 20px;
+}
+
+.product-list ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.product-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.product-list .ant-btn-danger {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+}
+
+.product-list .ant-btn-danger:hover {
+  background-color: #c0392b;
+  color: #fff;
+}

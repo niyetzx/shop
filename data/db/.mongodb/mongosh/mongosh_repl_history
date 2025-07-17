@@ -1,0 +1,22 @@
+db.users.find({ _id: ObjectId("68778ff7e6d4f69aa6990d10") }).pretty()
+printjson(result);
+);
+  { $set: { role: "admin" } }
+  { _id: ObjectId("68778ff7e6d4f69aa6990d10") },
+const result = db.users.updateOne(
+printjson(result);
+);
+  { $set: { role: "admin" } }
+  { _id: ObjectId("68778ff7e6d4f69aa6990d10") },
+const result = db.users.updateOne(
+)
+  { $set: { role: "admin" } }
+  { _id: ObjectId("68778ff7e6d4f69aa6990d10") },
+db.users.updateOne(
+db.users.find({ _id: ObjectId("68778ff7e6d4f69aa6990d10") }).pretty()
+)
+  { $set: { role: "admin" } }
+  { _id: ObjectId("68778ff7e6d4f69aa6990d10") },
+db.users.updateOne(
+db.users.find().pretty()
+use storedb
