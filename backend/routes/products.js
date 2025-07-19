@@ -49,6 +49,7 @@ router.post('/', auth, isAdmin, upload.array('images', 5), async (req, res) => {
         await product.save();
         res.status(201).json(product);
     } catch (error) {
+        console.error(error);
         res.status(400).json({ message: 'Ошибка при добавлении товара', error: error.message });
     }
 });

@@ -3,7 +3,6 @@ const router = express.Router();
 const Category = require('../models/category');
 const { auth, isAdmin } = require('../middleware/auth');
 
-// Получить все категории (публичный)
 router.get('/', async (req, res) => {
     try {
         const categories = await Category.find();
@@ -13,7 +12,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Создать категорию (только админ)
 router.post('/', auth, isAdmin, async (req, res) => {
     const category = new Category({
         name: req.body.name,
@@ -28,7 +26,6 @@ router.post('/', auth, isAdmin, async (req, res) => {
     }
 });
 
-// Обновить категорию (только админ)
 router.put('/:id', auth, isAdmin, async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
@@ -46,7 +43,6 @@ router.put('/:id', auth, isAdmin, async (req, res) => {
     }
 });
 
-// Удалить категорию (только админ) — вот сюда вставьте или замените на этот:
 router.delete('/:id', auth, isAdmin, async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);

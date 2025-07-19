@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/user');
 const { auth, isAdmin, generateToken } = require('../middleware/auth');
 
-// Register.js new user
 router.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -39,7 +38,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login user
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -71,19 +69,16 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Change password
 router.patch('/change-password', auth, async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
         const user = await User.findById(req.user._id);
 
-        // Проверяем текущий пароль
         const isMatch = await user.comparePassword(currentPassword);
         if (!isMatch) {
             return res.status(400).json({ message: 'Текущий пароль неверен' });
         }
 
-        // Устанавливаем новый пароль
         user.password = newPassword;
         await user.save();
 
@@ -93,7 +88,6 @@ router.patch('/change-password', auth, async (req, res) => {
     }
 });
 
-// Get user profile
 router.get('/profile', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('-password');
@@ -103,7 +97,6 @@ router.get('/profile', auth, async (req, res) => {
     }
 });
 
-// Update user profile
 router.patch('/profile', auth, async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['username', 'email', 'profile'];
@@ -122,8 +115,6 @@ router.patch('/profile', auth, async (req, res) => {
     }
 });
 
-// Admin routes
-// Get all users (admin only)
 router.get('/users', auth, isAdmin, async (req, res) => {
     try {
         const users = await User.find({}).select('-password');
@@ -133,7 +124,6 @@ router.get('/users', auth, isAdmin, async (req, res) => {
     }
 });
 
-// Update user role (admin only)
 router.patch('/users/:id/role', auth, isAdmin, async (req, res) => {
     try {
         const { role } = req.body;
@@ -154,18 +144,15 @@ router.patch('/users/:id/role', auth, isAdmin, async (req, res) => {
     }
 });
 
-// Admin: Create new user
 router.post('/users', auth, isAdmin, async (req, res) => {
     try {
         const { username, email, password, role } = req.body;
 
-        // Check if user already exists
         const existingUser = await User.findOne({ $or: [{ email }, { username }] });
         if (existingUser) {
             return res.status(400).json({ message: 'Пользователь уже существует' });
         }
 
-        // Validate role
         if (role && !['user', 'admin'].includes(role)) {
             return res.status(400).json({ message: 'Недопустимая роль' });
         }
@@ -193,7 +180,6 @@ router.post('/users', auth, isAdmin, async (req, res) => {
     }
 });
 
-// Admin: Delete user
 router.delete('/users/:id', auth, isAdmin, async (req, res) => {
     try {
         // Prevent self-deletion
@@ -212,7 +198,6 @@ router.delete('/users/:id', auth, isAdmin, async (req, res) => {
     }
 });
 
-// Admin: Update user by ID
 router.patch('/users/:id', auth, isAdmin, async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -226,7 +211,6 @@ router.patch('/users/:id', auth, isAdmin, async (req, res) => {
         if (email) user.email = email;
 
         if (password && password.trim() !== '') {
-            // Здесь важный момент — пароль надо хешировать
             user.password = password;
         }
 
