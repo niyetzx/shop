@@ -13,6 +13,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Products from './components/Products';
 import { useTheme } from './contexts/ThemeContext';
+import Favorites from './pages/Favorites';
+import Cart from "./pages/Cart";
 
 function App() {
   const { theme } = useTheme();
@@ -64,6 +66,8 @@ function App() {
                       </PrivateRoute>
                     }
                 />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/favorites" element={<Favorites />} />
               </Routes>
             </Box>
             <Footer />

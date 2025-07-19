@@ -12,6 +12,7 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb://mongodb:27017/storedb";
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products'); // ✅ продуктовые роуты
 const categoryRoutes = require('./routes/category.routes'); // категории
+const cartRoutes = require('./routes/cart.routes');
 
 // Middleware
 app.use(cors());
@@ -22,7 +23,7 @@ app.use('/uploads', express.static('uploads')); // Статические фай
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes); // лучше явно указать /api/products
 app.use('/api/categories', categoryRoutes);
-
+app.use('/api/cart', cartRoutes);
 // Подключение к MongoDB
 mongoose
     .connect(MONGO_URI)
